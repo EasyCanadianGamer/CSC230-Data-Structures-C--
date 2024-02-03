@@ -16,7 +16,7 @@ int main()
         for( int j = i;j<y;j++)
         {
             cin >> c;
-            arr[x][y] = c;
+            arr[i][j] = c;
         }
     }
 
@@ -25,7 +25,7 @@ int main()
         for( int j = 0;j<y;j++)
         {
            
-            cout << arr[x][y] << " ";
+            cout << arr[i][j] << " ";
         }
     }
 
