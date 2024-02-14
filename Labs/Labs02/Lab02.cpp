@@ -11,9 +11,6 @@ int main(int argc, char *argv[]) {
     char c;
     char str[100];
 
-    // cin >> str;
-    // cin >> a;
-    // cin >> b;
     cin >> x;
     cin >> y;
 
