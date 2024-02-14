@@ -1,0 +1,7 @@
+going to use a vector  
+
+function called search, that will search through the vector to find words and highlight it in red  
+
+First it will iterate through the vector and search of on the letters. 
+If the first letter is there, then it will serach around for the next letter around the first, repeat till the last letter is found or it cannot it find it.
+if found return true
