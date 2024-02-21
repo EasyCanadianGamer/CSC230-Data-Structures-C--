@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <fstream> 
+#include<string.h>
 using namespace std; 
  
 
@@ -14,6 +15,7 @@ using namespace std;
 int main(int argc, char* argv[]){   
 char i;
 
+
 myData data1[1000];
 
 int index =0;   
@@ -25,16 +27,11 @@ fstream input(argv[1]);
   while(!input.eof()){ 
 
     input >> i;
-    //cout << i; 
     input >> data1[index].ssn;
-    //cout << data1[index].ssn;
     input  >> data1[index].name;
-    //cout << data1[index].name;
     string Lname;
     input >> Lname;
     data1[index].name += " " + Lname;
-
-    //cout << data1[index].name << " " << Lname;
 
 
     index++;
@@ -54,8 +51,8 @@ bool found = false;
 
 for ( int i = 0; i < index;i++)
 {
-    string str= data1[index].ssn;
-    if ( str.compare(SSn) ==0)
+    string str= data1[i].ssn;
+    if ( str == SSn)
     {
         cout << "Found at location " << i << endl;
       found = true;
@@ -69,7 +66,6 @@ for ( int i = 0; i < index;i++)
 if (!found) {
     cout << "Not found" << endl;
   }
-
 
 return 0;
 } 
