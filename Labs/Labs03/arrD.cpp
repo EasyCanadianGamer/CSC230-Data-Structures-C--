@@ -17,7 +17,7 @@ int main()
 
     cin >> x;
 
-    for (int i = x - 1; i < sizeArr - 1; ++i)
+    for (int i = x; i < sizeArr - 1; ++i)
     {
         arr[i] = arr[i + 1];
     }
