@@ -16,7 +16,7 @@ int main(int argc, char* argv[]){
 char i;
 
 
-myData data1[1000];
+static myData data1[1000];
 
 int index =0;   
 
