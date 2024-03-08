@@ -1,8 +1,44 @@
-going to use a vector  
+Function search(matrix, word, x, y, dx, dy, matrix2)
+    wordLength = length of word
+    newX = x, newY = y
 
-function called search, that will search through the vector to find words and highlight it in red  
+    For i from 0 to wordLength
+        If newX and newY are within the bounds of matrix
+            If character at matrix[newX][newY] matches character at word[i]
+                Set matrix2[newX][newY] to 1 (visited)
+            Else
+                Return false
+        Else
+            Return false
 
-First it will iterate through the vector and search of on the letters. 
-If the first letter is there, then it will serach around for the next
- letter around the first, repeat till the last letter is found or it cannot it find it.
-if found return true
+        newX = newX + dx, newY = newY + dy
+
+    Return true (word is found)
+
+
+Function record(matrix2, i, j, x)
+    Set matrix2[i][j] to x
+
+
+Function printMatrix(matrix, highlightMatrix)
+    For each row in matrix
+        For each character in row
+            If highlightMatrix[row index][character index] is 1
+                Print character in red
+            Else
+                Print character in default color
+
+        Move to the next line
+
+
+Main
+    Read x and y from standard input
+    Initialize matrix and highlightMatrix with size x and y
+    Read matrix from standard input
+    For each command-line argument
+        For each position in matrix
+            For each direction (dx, dy)
+                If search(matrix, word, x, y, dx, dy, highlightMatrix)
+                    record(highlightMatrix, x, y, 1)
+
+    Print matrix with highlighted positions
