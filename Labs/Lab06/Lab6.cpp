@@ -1,125 +1,103 @@
+
 #include <iostream>
 #include <fstream>
 using namespace std;
 
-
-struct info{
-
+struct Node {
     string ssn;
     string name;
-
+    struct Node* next;
 };
 
-
-struct Node
-{
-  string data;
-  struct Node *next;
-};
-
-struct Node *head;
-struct Node *one = NULL;
-struct Node *two = NULL;
-struct Node *three = NULL;
-
-
-class List{
+class LinkedList {
 public:
-    List() { // constructor
-        head = NULL;
-    }
-    ~List() {}; // destructor
-    void addNode(string val);
-    void reverseList();
+    LinkedList() { head = NULL; }
+    ~LinkedList() {}
+    void append(string ssn, string name);
     void display();
+    int findIndexBySSN(string ssn);
+
 private:
     Node* head;
 };
 
-
-void List::addNode(string val) {
-    Node* newnode = new Node();
-    newnode->data = val;
-    newnode->next = NULL;
-    if (head == NULL) {
-        head = newnode;
+void LinkedList::append(string ssn, string name) {
+    Node* newNode = new Node();
+    newNode->ssn = ssn;
+    newNode->name = name;
+    newNode->next = NULL;
+    if(head == NULL)
+    {
+        head = newNode;
     }
-    else {
-        Node* temp = head; // head is not NULL
-        while (temp->next != NULL) { 
-            temp = temp->next; // go to end of list
-        }
-        temp->next = newnode; // linking to newnode
-    }
-}
-
-
-
-void List::display() {
-    if (head == NULL) {
-        cout << "List is empty!" << endl;
-    }
-    else {
+    else{
         Node* temp = head;
-        while (temp != NULL) {
-            cout << temp->data << " ";
-            temp = temp->next;
+        while ( temp -> next != NULL)
+        {
+            temp = temp-> next;
         }
-        cout << endl;
+            temp -> next = newNode;
+
     }
 }
 
-int main(int argc, char* argv[]){
-    
+void LinkedList::display() {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->ssn << " " << temp->name << endl;
+        temp = temp->next;
+    }
+}
 
-    char op;
-    string ssn;
-    string last;
-    string name;
-    int c = 0; // Indexes through the array of structures
+int LinkedList::findIndexBySSN(string ssn) {
+    Node* temp = head;
+    int index = 0;
+    while (temp != NULL) {
+        if (temp->ssn == ssn) {
+            return index;
+        }
+        temp = temp->next;
+        index++;
+    }
+    return -1; // SSN not found
+}
 
-    List* list = new LinkedList();
-
+int main(int argc, char* argv[]) {
+    LinkedList list;
+    string ssn, name, last;
     fstream input(argv[1]);
+    char c; 
 
-    while(!input.eof()){
-        
-        input >> op; // Reads the i in the beginning
+    while (!input.eof()) {
+
+
+        input >> c; // Reads the i in the beginning
 
         input >> ssn; // Reads the SSN listed in the file
 
         input >> name; // Reads the first name in the file
 
         input >> last; // Reads the last name in the file
-
-
-        list->addNode(name += " " + last);
+        list.append(ssn, name += " " + last);
         if(!input){ 
             break;
         }
-
     }
     input.close();
 
-    string user;
 
-    cout << "Input an SSN:" << endl;
-    cin >> user;
+    //list.display();
 
-    //cout << c;
+    string userSSN;
+    cout << "Input an SSN: ";
+    cin >> userSSN;
 
-    for(int i = 0; i < c; i++){
-
-        if(user == list[i].ssn){
-            cout << "Found at location: " << i;
-            break;
-        }
-
+    int index = list.findIndexBySSN(userSSN);
+    if (index != -1) {
+        cout << "Found at location " << index << endl;
+    } else {
+        cout << "SSN not found in the list." << endl;
     }
 
-    
-
-}
-
-// cin >> ssn >> first >> last
-    // ignore i
+    return 0;
+}   
