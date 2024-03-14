@@ -8,7 +8,12 @@
         "xstring": "cpp",
         "system_error": "cpp",
         "xlocale": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
