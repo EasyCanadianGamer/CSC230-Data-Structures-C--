@@ -13,7 +13,14 @@
         "deque": "cpp",
         "unordered_map": "cpp",
         "string_view": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "*.tcc": "cpp",
+        "chrono": "cpp",
+        "fstream": "cpp",
+        "ctime": "cpp",
+        "cstdio": "cpp",
+        "utility": "cpp",
+        "typeinfo": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

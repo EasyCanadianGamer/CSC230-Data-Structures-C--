@@ -1,136 +1,184 @@
 #include <iostream>
-#include <cstdio>
-#include <ctime>
 #include <fstream>
-#include<unordered_map>
+#include <string>
+#include <sstream>
+#include <chrono>
+
 using namespace std;
 
-
-
-
-
- struct IRS{
-    string name;
-    string ssn;
-    char l;
- 
- };
-
-int Valids( IRS temp[], int ind, char k);
-
-void checkValids( IRS temp[],IRS temp2[], int ind, char k);
-void checkDupe(IRS temp[], IRS temp2[], int ind);
-
-
-
-
-int main(int argc, char* argv[]) {
-  clock_t start, end;
-  double duration;  
-  int index = 0;
-  
-
-
-  start = clock();
-
-  /* Your code is here */
-int c =0;
-
-
-  char key1 = 'i';
-  char key2 = 'r';
-  char key3 = 'd'; 
-
-
- static IRS irs[1000];
-
- IRS valids[1000];
-
-
-
-
-  fstream input(argv[1]); 
-  while(!input.eof()){ 
-
-    input >> irs[index].l;
-    input >> irs[index].ssn;
-    input  >> irs[index].name;
-    string Lname;
-    input >> Lname;
-    irs[index].name += " " + Lname;
-
-
-    index++;
-if(!input) break; 
-
-  } 
-  
-  input.close(); 
-
-
-  // put inserts in the new list:
-  checkValids(irs, valids, index, key1);
-
-
-
-checkDupe(irs, valids, index);
-
-
-  cout << "Valid Insertations: " << Valids(valids, index, key1) << endl;
-  cout << "Valid Deletations: " << Valids(irs, index, key3) << endl;
-  cout << "Valid Retrevials: " << Valids(irs, index, key2) << endl;
-
-
-
-  end = clock();
-  duration = ( end - start ) / (double) CLOCKS_PER_SEC;
-
-  cout<<"elapsed time: "<< duration <<'\n';
-}
-
-int Valids( IRS temp[], int ind, char k)
+// Define a structure to hold the information of a person
+struct Person
 {
+  string ssn;
+  string name;
+};
+
+int main(int argc, char *argv[])
+{
+
+  // Open the input file
+  fstream infile(argv[1]);
+
+  // Initialize variables
+  const int INITIALIZED_SIZE = 1000;
+  int insertion_counter = 0;
+  int deletion_counter = 0;
+  int retrieval_counter = 0;
+  int array_size = INITIALIZED_SIZE;
+  int num_items = 0;
+  bool duplicate = false;
+  Person *array = new Person[array_size];
   int c = 0;
 
-  for( int i =0; i < ind; i++)
-  {
-    if(temp[i].l == k)
-    {
-      c++;
-    }
-  }
-  return c;
-}
+  // Start the timer
+  auto start = chrono::high_resolution_clock::now();
 
+  // Process the input file
+  char op;
+  string ssn, name, last;
 
-
-
-void checkValids( IRS temp[],IRS temp2[], int ind, char k)
-{
-  for( int i = 0; i < ind; i++)
-  {
-    if(temp[i].l == k)
-    {
-      temp2[i].l = temp[i].l;
-      temp2[i].ssn = temp[i].ssn;
-      temp2[i].name = temp[i].name;
-    }
-  }
-}
-
-
-void checkDupe(IRS temp[], IRS temp2[], int ind)
-{
-  for( int i =0; i < ind; i++)
+  while (!infile.eof())
   {
 
-    if (temp2[i].l != temp[i].l)
-    {
-          if(temp2[i].ssn == temp[i+1].ssn)
-    {
-            temp2[i].ssn 
-    }
-    }
-  }
-}
+    infile >> op;
+    infile >> ssn;
+    infile >> name;
+    infile >> last;
 
+    array[c].ssn = ssn;
+    array[c].name = name + " " + last;
+    // Check the operation type
+    switch (op)
+    {
+    case 'i':
+      // Insertion
+
+      duplicate = false;
+      for (int i = 0; i < num_items; i++)
+      {
+        if (array[i].ssn == ssn)
+        {
+          duplicate = true;
+          break;
+        }
+      }
+      if (!duplicate)
+      {
+        // Add the new person to the end of the array
+        if (num_items == array_size)
+        {
+          // If the array is full, create a new array with doubled size
+          array_size *= 2;
+          Person *new_array = new Person[array_size];
+          for (int i = 0; i < num_items; i++)
+          {
+            new_array[i] = array[i];
+          }
+          delete[] array;
+          array = new_array;
+        }
+        // Add the new person to the end of the array
+        array[num_items].ssn = ssn;
+        array[num_items].name = name;
+        num_items++;
+
+        if (num_items < array_size / 4)
+        {
+          array_size = array_size / 2;
+          Person *new_array = new Person[array_size];
+          for (int i = 0; i < num_items; i++)
+          {
+            new_array[i] = array[i];
+          }
+          delete[] array;
+          array = new_array;
+        }
+        array[num_items].ssn = ssn;
+        array[num_items].name = name;
+        num_items++;
+        insertion_counter++;
+      } if (num_items == array_size)
+        {
+          // If the array is full, create a new array with doubled size
+          array_size *= 2;
+          Person *new_array = new Person[array_size];
+          for (int i = 0; i < num_items; i++)
+          {
+            new_array[i] = array[i];
+          }
+          delete[] array;
+          array = new_array;
+        }
+        // Add the new person to the end of the array
+        array[num_items].ssn = ssn;
+        array[num_items].name = name;
+        num_items++;
+
+        if (num_items < array_size / 4)
+        {
+          array_size = array_size / 2;
+          Person *new_array = new Person[array_size];
+          for (int i = 0; i < num_items; i++)
+          {
+            new_array[i] = array[i];
+          }
+          delete[] array;
+          array = new_array;
+        }
+        array[num_items].ssn = ssn;
+        array[num_items].name = name;
+        num_items++;
+        insertion_counter++;
+      }
+      break;
+
+    case 'd':
+      // Deletion
+
+      for (int i = 0; i < num_items; i++)
+      {
+        if (array[i].ssn == ssn && array[i].name == name)
+        {
+          // Delete the person from the array
+          for (int j = i + 1; j < num_items; j++)
+          {
+            array[j - 1] = array[j];
+          }
+          num_items--;
+          deletion_counter++;
+          break;
+        }
+      }
+      break;
+
+    case 'r':
+      // Retrieval
+
+      for (int i = 0; i < num_items; i++)
+      {
+        if (array[i].ssn == ssn && array[i].name == name)
+        {
+          retrieval_counter++;
+          break;
+        }
+      }
+      break;
+    }
+    c++;
+  }
+
+  // Stop the timer
+  auto end = chrono::high_resolution_clock::now();
+  auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+
+  for (int i = 0; i < c; i++)
+  {
+    cout << array[i].ssn << "  " << array[i].name << endl;
+  }
+
+  // Print the results
+  cout << "The Number of Valid Insertation :" << insertion_counter << endl;
+  cout << "The Number of Valid Deletion :" << deletion_counter << endl;
+  cout << "The Number of Valid Retrieval :" << retrieval_counter << endl;
+  cout << "Item numbers in the array :" << num_items << endl;
+}
