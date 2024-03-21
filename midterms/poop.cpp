@@ -40,6 +40,10 @@ public:
  void merge(SLL x){
     Node* curr_into = this -> headPtr;
     Node* curr_from = x.getHeadPtr();
+    if( headPtr == nullptr)
+    {
+        headPtr = x.getHeadPtr();
+    }
     while( curr_into != nullptr)
     {
         if( curr_from == nullptr)
@@ -77,14 +81,10 @@ int main()
     SLL list, list2;
     list.append('a');
     list.append('b');
-    list.append('c');
 
     // list.display();
 
-    list2.append('w');
-    list2.append('x');
-    list2.append('y');
-    list2.append('z');
+    // list2.append('w');
 
     // list2.display();
 
