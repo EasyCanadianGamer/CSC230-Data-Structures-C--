@@ -40,22 +40,23 @@ public:
  void merge(SLL x){
     Node* curr_into = this -> headPtr;
     Node* curr_from = x.getHeadPtr();
-    Node* curr_into_prev = NULL;
     while( curr_into != nullptr)
     {
         if( curr_from == nullptr)
         {
             return;
         }
+        if (curr_into->next == nullptr) {
+            curr_into->next = curr_from;
+            return;
+        }
 
         Node* temp = new Node { curr_from -> val, curr_into -> next};
 
         curr_into -> next =  temp; 
-        curr_into_prev = curr_into->next;
         curr_into = curr_into ->next->next;
         curr_from = curr_from -> next;
     }
-    curr_into_prev-> next = curr_from;
 
  }
 
