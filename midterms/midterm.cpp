@@ -4,61 +4,72 @@
 #include <array>
 using namespace std;
 
-void myth(int n)
+// void myth(int n)
+// {
+//     if ( n > 0)
+//     {
+//         myth(n-1);
+//         for( int i =0; i< n;i++)
+//         {
+//             cout << "#";
+//         }
+//         cout << endl;
+//     }
+// }
+
+
+// class A{
+//     public:
+//     void foo(){
+//         cout<< "From A" << endl;
+//     }
+// };
+// class B:public A{
+//     public:
+//     void foo(){
+//         cout<< "From B" << endl;
+//     }
+// };
+
+
+// bool foo2( char*p)
+// {
+//     int i =strlen(p);
+//     char* r = p + i-1;
+//     while( p < r)
+//     {
+//         if( *p == *r)
+//         {
+//             p++;
+//             r--;
+//         }
+//         else{
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+
+// void bar ( int& m, int *n)
+// {
+//     m = *n;
+// }
+
+
+void printArray(const int* arr, int size)
 {
-    if ( n > 0)
+    for (int i = 0; i < size; i++)
     {
-        myth(n-1);
-        for( int i =0; i< n;i++)
-        {
-            cout << "#";
-        }
-        cout << endl;
+        cout << arr[i] << "\t";
     }
+    cout << endl;
 }
-
-
-class A{
-    public:
-    void foo(){
-        cout<< "From A" << endl;
-    }
-};
-class B:public A{
-    public:
-    void foo(){
-        cout<< "From B" << endl;
-    }
-};
-
-
-bool foo2( char*p)
-{
-    int i =strlen(p);
-    char* r = p + i-1;
-    while( p < r)
-    {
-        if( *p == *r)
-        {
-            p++;
-            r--;
-        }
-        else{
-            return false;
-        }
-    }
-    return true;
-}
-
-void bar ( int& m, int *n)
-{
-    m = *n;
-}
-
 
 void arrMerge( int*& A, int Asize, int*& B, int Bsize, int*& C, int Csize)
 {
     Csize = Asize + Bsize;
+
+    C = new int[Csize];
     for ( int i = 0; i < Asize; i++)
     {
         C[i] = A[i];
@@ -66,15 +77,9 @@ void arrMerge( int*& A, int Asize, int*& B, int Bsize, int*& C, int Csize)
     delete [] A;
     for ( int i = 0; i < Bsize; i++)
     {
-        C[i] = B[i];
+        C[Asize+i] = B[i];
     }
     delete [] B;
-
-    for ( int i = 0; i < Csize; i ++)
-    {
-        cout << C[i] << "/t";
-    }
-    cout << endl;
     
 }
 
@@ -86,31 +91,32 @@ int main()
      int BSIZE = 3;
     int Czse = 0;
 
-    int a [ASIZE];
-    int b [BSIZE];
-    int c [Czse];
+    int*a = new int[ASIZE];
+    int* b = new int [BSIZE];
+    int* c = nullptr;
 
-    for ( int i; i < ASIZE; i++)
+    for ( int i =0; i < ASIZE; i+2)
     {
-        a[i] = i+2;
+        a[i] = i; 
     }
-    for ( int i =0; i < BSIZE; i++)
+    for ( int i =0; i < BSIZE; i+3)
     {
-        b[i] = i+3;
+        b[i] = i;
     }
 
-        for ( int i; i < ASIZE; i++)
-    {
-       cout << a[i] << "\t";
-    }
-    cout << endl;
-    for ( int i =0; i < BSIZE; i++)
-    {
-       cout << b[i] << "\t";
-    }
-    cout << endl;
 
-    arrMerge(a,ASIZE, b, BSIZE, c, Czse);
+
+cout << "Array A: ";
+    printArray(a, ASIZE);
+    cout << "Array B: ";
+    printArray(b, BSIZE);
+
+    arrMerge(a, ASIZE, b, BSIZE, c, Czse);
+
+    cout << "Merged Array C: ";
+    printArray(c, Czse);
+
+    delete[] c; 
 
 
 
