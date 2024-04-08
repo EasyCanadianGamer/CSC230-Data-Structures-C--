@@ -30,11 +30,10 @@ int main(){
     
     
     cout << "Testing copy constructor" << endl;
-    cout<< (myList.getHeadPtr()) -> ssn;
     DLL* temp = new DLL(myList);
     
     
-    cout << "Contents of the original list" << endl;
+    cout << "\nContents of the original list" << endl;
     myList.display();
     
     cout << "Contents of the new list, the memory address of the this list must be different from the original list" << endl;

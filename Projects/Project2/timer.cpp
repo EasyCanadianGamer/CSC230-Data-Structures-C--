@@ -18,7 +18,6 @@ struct IRS
 };
 
 
-int insert( IRS irs[], bool dupe, int &n_itms, string ssn, string name);
 
 int main(int argc, char *argv[])
 {
@@ -62,26 +61,26 @@ int main(int argc, char *argv[])
       // Insertion
 
       insertion_counter = insert(irs, duplicate, num_items, ssn, name);
-      // duplicate = false;
-      // // checks for duplicates
-      // for (int i = 0; i < num_items; i++)
-      // {
-      //   if (irs[i].ssn == ssn)
-      //   {
-      //     duplicate = true;
-      //     break;
-      //   }
-      // }
+      duplicate = false;
+      // checks for duplicates
+      for (int i = 0; i < num_items; i++)
+      {
+        if (irs[i].ssn == ssn)
+        {
+          duplicate = true;
+          break;
+        }
+      }
 
       
-      // if (!duplicate) // if there the duplicate is either false or true it will add the new entrys at the end of the array
-      // {
-      //   // Add the new irs to the end of the array
-      //   irs[num_items].ssn = ssn;
-      //   irs[num_items].name = name;
-      //   num_items++;
-      //   insertion_counter++;
-      // }
+      if (!duplicate) // if there the duplicate is either false or true it will add the new entrys at the end of the array
+      {
+        // Add the new irs to the end of the array
+        irs[num_items].ssn = ssn;
+        irs[num_items].name = name;
+        num_items++;
+        insertion_counter++;
+      }
       break;
 
     case 'd':
@@ -161,32 +160,3 @@ int main(int argc, char *argv[])
 
 }
 
-
-
-int insert( IRS irs[], bool dupe, int &n_itms, string ssn, string name)
-{
-  int c = 0;
-  int num_items = n_itms;
-
-
-      dupe = false;
-      // checks for duplicates
-      for (int i = 0; i < num_items; i++)
-      {
-        if (irs[i].ssn == ssn)
-        {
-          dupe = true;
-          break;
-        }
-      }
-
-      
-      if (!dupe) // if there the duplicate is either false or true it will add the new entrys at the end of the array
-      {
-        // Add the new irs to the end of the array
-        irs[num_items].ssn = ssn;
-        irs[num_items].name = name;
-        num_items++;
-        c++;
-      }
-}
