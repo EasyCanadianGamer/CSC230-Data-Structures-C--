@@ -14,45 +14,33 @@ class MyQueue {
     // return the value of the oldest member
    T front() {
     if (first.empty()) {
-        throw underflow_error("Queue is empty");
-    }
-    // Move all elements from first to second stack
-    while (!first.empty()) {
-        second.push(first.top());
-        first.pop();
-    }
-    // Get the front element from second stack
-    T oldest = second.top();
-    // Move elements back to first stack
-    while (!second.empty()) {
-        first.push(second.top());
-        second.pop();
-    }
-    return oldest;
+       throw underflow_error("Queue is empty");
+     }
+     return first.top();
+
 }
 
 
     // add value val to MyQueue
 void push(T val) {
+    while(!first.empty())
+    {
+        second.push(first.top());
+        first.pop();
+    }
     first.push(val);
+    while(!second.empty())
+    {
+        first.push(second.top());
+        second.pop();
+    }
 }
 
 
 
     // remove the oldest member from MyQueue
 void pop() {
-    if (first.empty()) {
-        throw underflow_error("Queue is empty");
-    }
-    // Move all elements from first to second stack except the last one
-    while (first.size() > 1) {
-        second.push(first.top());
-        first.pop();
-    }
-    // Remove the last element from first stack
     first.pop();
-    // Swap the stacks
-    swap(first, second);
 }
 
 };

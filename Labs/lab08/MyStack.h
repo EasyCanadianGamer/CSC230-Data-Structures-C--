@@ -45,8 +45,7 @@ class MyStack {
         // Remove the last element from the first queue
         first.pop();
         // Swap the queues so that the second queue becomes the first
-        swap(first, second);
-    // please implement this method
+        swap(first , second);
   }
 
   

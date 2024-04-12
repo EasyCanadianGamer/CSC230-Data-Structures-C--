@@ -46,10 +46,9 @@ int main(int argc, char *argv[]) {
         irs.remove(ssn,dCounter);
       break;
     case 'r':
-        if(        irs.search(ssn))
+        if( irs.search(ssn) != -1)
         {
                   rCounter++;
-
         }         
          break;
   }
@@ -69,7 +68,7 @@ int main(int argc, char *argv[]) {
   cout << "Number of insertions: " << counter << endl;
   cout << "Number of deletions: " << dCounter << endl;
   cout << "Number of retrievals: " << rCounter << endl;
-  cout << "Number of items in the list: " << irs.size() - dCounter << endl;
+  cout << "Number of items in the list: " << irs.size() << endl;
 
 
 

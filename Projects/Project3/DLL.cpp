@@ -77,7 +77,7 @@ DLL::~DLL(){
 // if some node has SSN matcthes string ss
 // return the index value of the node
 // the index value of the first node is 0, the second node is 1, etc.
-// if there is node matching ss, return -1
+// if there is node matching ss, return 0
 int DLL::search(string ss)const{
         Node* curr = headPtr;
         int curr_index =0;
@@ -158,7 +158,7 @@ bool DLL::insert(string ss, string name, int & count){
         }
     }
 
-    if( newNode->ssn == current->succ->ssn && newNode->ssn < current->ssn)
+    if( newNode->ssn == current->succ->ssn && newNode->ssn > current->ssn)
     {
         delete newNode;
         return false;
@@ -211,6 +211,7 @@ bool DLL::remove(string ss, int & count){
         // Delete the node
         delete current;
         count++; // Decrement itemCount
+        itemCount--;
         return true;
     } else {
         // Node with the specified SSN not found

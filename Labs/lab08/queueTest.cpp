@@ -14,6 +14,8 @@ int main ()
   cout << "Serve the people in queue : " << endl;
   cout << names.front() << endl;
   names.pop();
+
+  
   cout << names.front() << endl;
   names.pop();
   cout << names.front() << endl;
