@@ -65,8 +65,8 @@ int main(int argc, char *argv[]) {
 
 
 
-  cout << "Number of insertions: " << counter << endl;
-  cout << "Number of deletions: " << dCounter << endl;
+  cout << "Number of insertions: " << counter-- << endl;
+  cout << "Number of deletions: " << dCounter-- << endl;
   cout << "Number of retrievals: " << rCounter << endl;
   cout << "Number of items in the list: " << irs.size() << endl;
 
