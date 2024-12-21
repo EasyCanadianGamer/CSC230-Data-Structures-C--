@@ -14,7 +14,6 @@ class HashTable {
         tableSize = 3;
         table = new SLL<V>[tableSize];
     }
-    
     // constructor, which use size as the table size
     HashTable(int size){
       // implement this method
@@ -26,8 +25,14 @@ class HashTable {
     // if found, return true; otherwise, return false
     bool find(V item){
       // implement this method
-      int hash = item.hash() % tableSize;
-      return table[hash].search(item)!= nullptr;
+      int i = stoi(item);
+      int hash = i % tableSize;  
+      if(table[hash].search(item)!= nullptr )
+      {
+        return true;
+      }
+
+      return false;
     }
     
     // insert (item1, item2) to the table
@@ -36,9 +41,17 @@ class HashTable {
     // otherwise, return false
     bool insert(V item1, V item2){
       //implement this method
-      int hash = item1.hash() % tableSize;
-      return table[hash].insert(item1, item2);
+      int i = stoi(item1);
 
+      int hash = i % tableSize;
+
+      if( table[hash].search(item1) != nullptr)
+      {
+        return false;
+      }
+        table[hash].insert(item1, item2);
+
+      return true;
     }
     
     // delete the pair whose key value is item
@@ -46,7 +59,9 @@ class HashTable {
     // otherwise, return false 
     bool erase(V item){
       // implement this method
-      int hash = item.hash() % tableSize;
+      int i = stoi(item);
+
+      int hash = i % tableSize;
       return table[hash].remove(item);
 
     }

@@ -34,6 +34,7 @@ class SLL {
     // insert (item1, item2) to the list
     void insert(U item1, U item2){
       //implement this method
+      cout<< "inserting: "<< item1 << " " << item2 << endl;
       Node<U>* newNode = new Node<U>;
       newNode->SSN = item1;
       newNode->name = item2;
@@ -49,12 +50,19 @@ class SLL {
       //implement this method
       Node<U>* temp;
       temp = headPtr;
+      cout<< "searcing for: "<< item1 << endl;
+    //     if (temp == nullptr) {
+    //       return nullptr;
+    //   }
       while (temp!= nullptr) {
+            cout << temp->SSN << endl;
           if (temp->SSN == item1) {
               return temp;
           }
           temp = temp->next;
       }
+
+
       return nullptr;
 
     }
@@ -64,6 +72,9 @@ class SLL {
       //implement this method
       Node<U>* temp;
       temp = headPtr;
+      if (temp == nullptr) {
+          return false;
+      }
       if (temp->SSN == item1) {
           headPtr = temp->next;
           delete temp;
